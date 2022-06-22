@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client';
 
+function createStore(initialState) {
+  let state = initialState
+  function getState() {
+    return state
+  }
+  return {getState}
+}
+const store = createStore([{id:1, description: 'Task 1', completed: false}])
+
 const App = (params) => {
-  return <h1>App</h1>
+  console.log(store.getState())
+  return <h1>Фзз</h1>
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,7 +21,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
