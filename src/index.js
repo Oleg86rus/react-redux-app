@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client';
 import * as actions from './store/actions'
 import { initiateStore } from './store/store'
-import { taskCompleted } from './store/actions'
 
 const store = initiateStore()
 
@@ -23,6 +22,10 @@ const App = (params) => {
     store.dispatch(actions.changeTitle(taskId))
   }
   
+  const deleteTask = (taskId) => {
+    store.dispatch(actions.deleteTask(taskId))
+  }
+  
   return <>
     <h1>app</h1>
     <ul>
@@ -32,6 +35,7 @@ const App = (params) => {
           <p>{`Completed: ${el.completed}`}</p>
           <button onClick={()=>completedTask(el.id)}>Completed</button>
           <button onClick={()=>changeTitle(el.id)}>Change title</button>
+          <button onClick={()=>deleteTask(el.id)}>Delete</button>
           <hr/>
         </li>
       ))}
