@@ -21,16 +21,32 @@ function createStore(reducer, initialState) {
   }
   return {getState, dispatch}
 }
-const store = createStore(taskReducer, [{id:1, description: 'Task 1', completed: false}])
+const store = createStore(taskReducer, [
+  {id: 1, description: 'Task 1', completed: false},
+  {id: 2, description: 'Task 2', completed: false}
+])
 
 const App = (params) => {
   console.log(store.getState())
-  const completedTask = () => {
-    store.dispatch({type: "task/completed", payload: {id:1}})
+  const completedTask = (taskId) => {
+    store.dispatch({type: "task/completed", payload: {id:taskId}})
     console.log(store.getState())
   }
+  const state = store.getState()
   // store.dispatch({type: 'task/completed', preload: {id:1}})
-  return <><h1>Фзз</h1><button onClick={completedTask}>Completed</button></>
+  return <>
+    <h1>app</h1>
+    <ul>
+      {state.map(el=>(
+        <li key={el.id}>
+          <p>{el.description}</p>
+          <p>{`Completed: ${el.completed}`}</p>
+          <button onClick={()=>completedTask(el.id)}>Completed</button>
+          <hr/>
+        </li>
+      ))}
+    </ul>
+  </>
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
