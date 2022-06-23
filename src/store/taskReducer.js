@@ -1,6 +1,6 @@
 import { taskUpdated } from './actionTypes'
 
-export function taskReducer(state, action) {
+export function taskReducer(state = [], action) {
   switch (action.type) {
     case taskUpdated: {
       const newArray = [...state]
@@ -8,5 +8,7 @@ export function taskReducer(state, action) {
       newArray[elementIndex] = {...newArray[elementIndex], ...action.payload}
       return newArray
     }
+    default:
+      return state
   }
 }
