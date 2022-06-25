@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client';
 import {
-  completeTask,
+  completeTask, getTasks,
   taskDeleted,
   titleChanged,
 } from './store/task'
@@ -13,6 +13,7 @@ const App = (params) => {
   const [state, setState] = useState(store.getState())
   
   useEffect(()=>{
+    store.dispatch(getTasks())
     store.subscribe(()=>{
       setState(store.getState())
     })
