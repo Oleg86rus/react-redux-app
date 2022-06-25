@@ -6,18 +6,14 @@ import {
   titleChanged,
 } from './store/task'
 import configureStore from './store/store'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 
 const store = configureStore()
 
 const App = (params) => {
-  const [state, setState] = useState(store.getState())
-  
+  const state = useSelector((state) => state)
   useEffect(()=>{
     store.dispatch(getTasks())
-    store.subscribe(()=>{
-      setState(store.getState())
-    })
   }, [])
   
   const changeTitle = (taskId) => {
