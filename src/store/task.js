@@ -5,7 +5,9 @@ const initialState = [
   {id: 2, title: 'Task 2', completed: false}
 ]
 
-const taskSlice = createSlice({name: 'task', initialState, reducers: {
+const taskSlice = createSlice({
+  name: 'task', initialState,
+  reducers: {
     update(state, action) {
       const elementIndex = state.findIndex(el=>el.id===action.payload.id)
       state[elementIndex] = {...state[elementIndex], ...action.payload}
@@ -16,10 +18,10 @@ const taskSlice = createSlice({name: 'task', initialState, reducers: {
 }})
 const {actions, reducer: taskReducer} = taskSlice
 const {update, remove} = actions
-
-export function taskCompleted(id) {
-  return update({id: id, completed: true})
+export const completeTask = (id) => (dispatch, getState) => {
+  dispatch(update({id: id, completed: true}))
 }
+
 export function titleChanged(id) {
   return update({ id: id, title: `New title for ${id}`})
 }
