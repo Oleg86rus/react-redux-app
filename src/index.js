@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client';
 import {
   completeTask, getTasks,
@@ -6,6 +6,7 @@ import {
   getTasksLoadingStatus,
   taskDeleted,
   titleChanged,
+  taskCreated
 } from './store/task'
 import configureStore from './store/store'
 import { Provider, useDispatch, useSelector } from 'react-redux'
@@ -30,6 +31,9 @@ const App = (params) => {
   const deleteTask = (taskId) => {
     dispatch(taskDeleted(taskId))
   }
+  const createTask = (state) => {
+    dispatch(taskCreated(state))
+  }
   
   if (isLoading) {
     return <h1>LOADING...</h1>
@@ -51,6 +55,7 @@ const App = (params) => {
         </li>
       ))}
     </ul>
+    <button onClick={()=>createTask(state)}>Создать задачу</button>
   </>
 }
 

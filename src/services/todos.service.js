@@ -9,6 +9,10 @@ const todosService = {
       }
     })
     return data
+  },
+  create: async () => {
+    const {data} = await httpService.post(todosEndpoint)
+    return data
   }
 }
 export default todosService
