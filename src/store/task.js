@@ -26,7 +26,7 @@ const taskSlice = createSlice({
       state.isLoading = false
     },
     createTask(state, action) {
-      state.entities.push(action.payload)
+      state.entities.push({...action.payload, id: Date.now()})
     }
 }})
 const {actions, reducer: taskReducer} = taskSlice
